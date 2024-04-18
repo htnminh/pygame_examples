@@ -67,6 +67,7 @@ class HexagonTile:
     def render(self, screen) -> None:
         """Renders the hexagon on the screen"""
         pygame.draw.polygon(screen, self.highlight_colour, self.vertices)
+        pygame.draw.aalines(screen, (0, 0, 0), closed=True, points=self.vertices)
 
     def render_highlight(self, screen, border_colour) -> None:
         """Draws a border around the hexagon with the specified colour"""

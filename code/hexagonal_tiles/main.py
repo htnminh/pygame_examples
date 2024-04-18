@@ -15,15 +15,15 @@ from hexagon import HexagonTile
 # pylint: disable=no-member
 
 
-def create_hexagon(position, radius=50, flat_top=False) -> HexagonTile:
+def create_hexagon(position, radius=30, flat_top=False) -> HexagonTile:
     """Creates a hexagon tile at the specified position"""
     class_ = FlatTopHexagonTile if flat_top else HexagonTile
-    return class_(radius, position, colour=get_random_colour())
+    return class_(radius, position, colour=(220, 220, 220))
 
 
-def get_random_colour(min_=150, max_=255) -> Tuple[int, ...]:
-    """Returns a random RGB colour with each component between min_ and max_"""
-    return tuple(random.choices(list(range(min_, max_)), k=3))
+# def get_random_colour(min_=150, max_=255) -> Tuple[int, ...]:
+#     """Returns a random RGB colour with each component between min_ and max_"""
+#     return tuple(random.choices(list(range(min_, max_)), k=3))
 
 
 def init_hexagons(num_x=20, num_y=20, flat_top=False) -> List[HexagonTile]:
@@ -77,9 +77,9 @@ def render(screen, hexagons):
 def main():
     """Main function"""
     pygame.init()
-    screen = pygame.display.set_mode((600, 400))
+    screen = pygame.display.set_mode((900, 700))
     clock = pygame.time.Clock()
-    hexagons = init_hexagons(flat_top=True)
+    hexagons = init_hexagons(flat_top=False)
     terminated = False
     while not terminated:
         for event in pygame.event.get():
