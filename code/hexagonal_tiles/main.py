@@ -15,7 +15,7 @@ from hexagon import HexagonTile
 # pylint: disable=no-member
 
 
-def create_hexagon(position, radius=30, flat_top=False) -> HexagonTile:
+def create_hexagon(position, radius=25, flat_top=False) -> HexagonTile:
     """Creates a hexagon tile at the specified position"""
     class_ = FlatTopHexagonTile if flat_top else HexagonTile
     return class_(radius, position, colour=(220, 220, 220))
@@ -26,15 +26,16 @@ def create_hexagon(position, radius=30, flat_top=False) -> HexagonTile:
 #     return tuple(random.choices(list(range(min_, max_)), k=3))
 
 
-def init_hexagons(num_x=20, num_y=20, flat_top=False) -> List[HexagonTile]:
+def init_hexagons(num_x=17, num_y=17, flat_top=False) -> List[HexagonTile]:
     """Creates a hexaogonal tile map of size num_x * num_y"""
     # pylint: disable=invalid-name
-    leftmost_hexagon = create_hexagon(position=(-50, -50), flat_top=flat_top)
+    leftmost_hexagon = create_hexagon(position=(50, 25), flat_top=flat_top)
     hexagons = [leftmost_hexagon]
     for x in range(num_y):
         if x:
             # alternate between bottom left and bottom right vertices of hexagon above
-            index = 2 if x % 2 == 1 or flat_top else 4
+            # index = 2 if x % 2 == 1 or flat_top else 4
+            index = 4
             position = leftmost_hexagon.vertices[index]
             leftmost_hexagon = create_hexagon(position, flat_top=flat_top)
             hexagons.append(leftmost_hexagon)
@@ -58,7 +59,7 @@ def init_hexagons(num_x=20, num_y=20, flat_top=False) -> List[HexagonTile]:
 
 def render(screen, hexagons):
     """Renders hexagons on the screen"""
-    screen.fill((0, 0, 0))
+    screen.fill((200, 200, 200))
     for hexagon in hexagons:
         hexagon.render(screen)
 
@@ -77,7 +78,7 @@ def render(screen, hexagons):
 def main():
     """Main function"""
     pygame.init()
-    screen = pygame.display.set_mode((900, 700))
+    screen = pygame.display.set_mode((1175+5, 700))
     clock = pygame.time.Clock()
     hexagons = init_hexagons(flat_top=False)
     terminated = False
