@@ -21,8 +21,8 @@ class HexagonTile:
     radius: float
     position: Tuple[float, float]
     colour: Tuple[int, ...]
-    highlight_offset: int = 20
-    max_highlight_ticks: int = 5
+    highlight_offset: int = 3
+    max_highlight_ticks: int = 10
 
     def __post_init__(self):
         self.vertices = self.compute_vertices()

@@ -91,7 +91,7 @@ def main():
             hexagon.update()
 
         render(screen, hexagons)
-        clock.tick(50)
+        clock.tick(60)  # max fps
     pygame.display.quit()
 
 
